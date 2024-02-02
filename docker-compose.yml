@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  practice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 'practice:pytorch'
+    container_name: 'pytorch'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
